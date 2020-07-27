@@ -1,0 +1,5 @@
+*.log
+*.zip
+*.tar.gz
+*.rar
+*/sample-scripts/

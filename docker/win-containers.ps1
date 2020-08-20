@@ -36,3 +36,7 @@ docker run -ti --name winbase_ps0002 -P --user "NT AUTHORITY\SYSTEM" -v C:\Users
   New-NetFirewallRule -Name "RDP" -DisplayName "Remote Desktop Protocol" -Protocol TCP -LocalPort @(3390) -Action Allow
 docker commit winbase_ps0002 n4base_img0001
 docker run --rm -ti --name winbase_ps0003 -e DISPLAY=$DISPLAY n4base_img0001 "C:\Program Files\Internet Explorer\iexplore.exe"
+
+# MSSQL SERVER BASE
+# Runs on a WIN 10 BASE image
+docker run --name SQLServer -d -p 1433:1433 --volume C:\Users\vms03\Documents\docker-vols\mssqlserver:C:\SQLData -e sa_password=Password_01 -e ACCEPT_EULA=Y 19873f41b375

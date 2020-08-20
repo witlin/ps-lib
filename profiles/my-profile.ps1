@@ -9,6 +9,15 @@ $psFormat = "\nID\t{{.ID}}\nIMAGE\t{{.Image}}\nCOMMAND\t{{.Command}}\nCREATED\t{
 $packtracer = $HOME + "\Cisco Packet Tracer 7.3.0\saves"
 $vcxsrvDir = "C:\Users\vms03\Documents\vcxsrv"
 
+# System info
+$ComputerName = $env:ComputerName
+$processorInfo = Get-WmiObject -Class Win32_Processor
+$SysInfo = Get-WmiObject -Class Win32_ComputerSystem
+$OsInfo = Get-WmiObject -Class Win32_OperatingSystem
+$DiskInfo = Get-WmiObject -Class Win32_LogicalDisk
+
+
+
 $DIST47_HOME = "C:\Niagara\EC-Net4-4.7.110.32"
 $DIST48_HOME = "C:\Niagara\EC-Net4-4.8.0.110"
 
@@ -75,3 +84,4 @@ function distech-wb47 {
 function distech-wb48 { 
     Start-Workbench -Path $DIST48_HOME"\bin\wb.exe" 
 }
+

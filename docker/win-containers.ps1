@@ -14,6 +14,7 @@ docker ps -a --format $psFormat
 
 # WIN SERVER CORE
 docker run -ti --name core_0001 mcr.microsoft.com/windows/servercore:ltsc2019 powershell.exe
+docker run --rm -ti --name core_0002 -P -v C:\Users\vms03\Documents\docker-vols\winserver:C:\Users\ContainerAdministrator\host-share mcr.microsoft.com/windows/servercore:ltsc2019 powershell.exe
 docker commit core_0001 winserver
 docker run --rm -ti --name core_0002 -P -v C:\Users\vms03\Documents\docker-vols\winserver:C:\Users\ContainerAdministrator\host-share winserver powershell.exe
 
@@ -24,8 +25,9 @@ docker run --rm -ti --name nano_0002 -P -v C:\Users\vms03\Documents\docker-vols\
 
 # WIN 10 BASE
 docker run -ti --name winbase_0001 mcr.microsoft.com/windows:1903 powershell.exe
+docker run -ti --name winbase_001 -P --user "NT AUTHORITY\SYSTEM" -v C:\Users\vms03\Documents\docker-vols\n4base:C:\Users\ContainerAdministrator\host-share mcr.microsoft.com/windows:1903 powershell.exe
 docker commit winbase_0001 n4base
-docker run -ti --name winbase_ps0002 -P --user "NT AUTHORITY\SYSTEM" -v C:\Users\vms03\Documents\docker-vols\n4base:C:\Users\ContainerAdministrator\host-share n4base powershell.exe
+docker run -ti --name winbase_001 -P --user "NT AUTHORITY\SYSTEM" -v C:\Users\vms03\Documents\docker-vols\n4base:C:\Users\ContainerAdministrator\host-share nn4base powershell.exe
   net user vitek dces /add
   net localgroup Administrators /add vitek
   net user administrator dces
@@ -38,5 +40,5 @@ docker commit winbase_ps0002 n4base_img0001
 docker run --rm -ti --name winbase_ps0003 -e DISPLAY=$DISPLAY n4base_img0001 "C:\Program Files\Internet Explorer\iexplore.exe"
 
 # MSSQL SERVER BASE
-# Runs on a WIN 10 BASE image
+# Runs on a WIN SERVER CORE image
 docker run --name SQLServer -d -p 1433:1433 --volume C:\Users\vms03\Documents\docker-vols\mssqlserver:C:\SQLData -e sa_password=Password_01 -e ACCEPT_EULA=Y 19873f41b375

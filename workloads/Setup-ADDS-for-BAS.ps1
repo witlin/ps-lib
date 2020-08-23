@@ -25,3 +25,5 @@ Install-ADDSForest -DomainName 'BASCustomer.net' -DomainNetBiosName 'BASCUSTOMER
 # Verify the work done so far
 Get-ADRootDSE
 
+# Safemode-password: Dc3S_@Dds01
+

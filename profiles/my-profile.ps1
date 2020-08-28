@@ -56,3 +56,8 @@ function distech-wb47 {
 function distech-wb48 { 
     Start-Workbench -Path $DIST48_HOME"\bin\wb.exe" 
 }
+
+function remote-to-server {
+    param([string] $hostName)
+    Enter-PSSession -ComputerName $hostName -Credential Get-Credential
+}

@@ -5,4 +5,7 @@
 # for WinRM clients allowing for server features is a vunerability and it must be plugged as part of the
 # Non-domain WinRM client config workload.
 Enable-PSRemoting -SkipNetworkProfileCheck
-$credential = Get-Credential
+$credentials = Get-Credential
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "172.16.0.2"
+$sess = New-PSSession -ComputerName 172.16.0.2 -Credential $credentials
+Enter-PSSession $sess

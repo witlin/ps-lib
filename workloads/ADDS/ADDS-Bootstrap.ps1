@@ -10,15 +10,16 @@ New-NetIPAddress `
 # Set the DNS Server's address (the local host is both a DNS and AD/LDS Server)
 Set-DnsClientServerAddress -InterfaceIndex 12 -ServerAddresses 172.16.0.2
 
-# Install Active Directory Tools
-Install-WindowsFeature RSAT-AD-Tools
-Import-Module ActiveDirectory
-
 # Rename the host server to a proper name.
 Rename-Computer -NewName DCES-ADDS -Restart -Force -PassThru
 
 # Install Active Directory Domain Services
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+# Install Active Directory Tools
+Install-WindowsFeature -Name RSAT-AD-Tools -IncludeManagementTools
+Restart-Computer -Force
+Import-Module ActiveDirectory
 
 # Test Forest Creation
 Import-Module ADDSDeployment

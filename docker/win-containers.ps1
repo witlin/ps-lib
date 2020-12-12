@@ -9,6 +9,9 @@ docker pull ubuntu
 
 docker ps -a --format $psFormat
 
+# CENTOS
+docker run -ti 
+
 # WIN 10 IOT  - NOT WORKING !!!
 # docker run --rm -ti --name iot_0001 mcr.microsoft.com/windows/iotcore:1809 cmd.exe
 

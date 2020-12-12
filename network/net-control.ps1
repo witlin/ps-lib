@@ -1,15 +1,15 @@
 Get-NetAdapter | Sort-Object -Property ifIndex | ft -Wrap  
 Get-NetIPAddress | Sort-Object -Property ifIndex | ft -Wrap
 
-Set-NetIPInterface -InterfaceIndex 14 -Dhcp Disabled -PassThru
+# Set-NetIPInterface -InterfaceIndex 14 -Dhcp Disabled -PassThru
+# Remove-NetIPAddress -ifIndex 14
 
-Remove-NetIPAddress -ifIndex 14
-
+#DCES Eclypse | laptop = 
 New-NetIPAddress `
-    -AddressFamily IPv4 `
-    -InterfaceIndex 14  `
-    -IPAddress 172.16.0.2 `
-    -PrefixLength 27 `
+  -AddressFamily IPv4 `
+    -InterfaceIndex 11  `
+    -IPAddress 172.16.0.3 `
+    -PrefixLength 24 `
     -DefaultGateway 172.16.0.1
 
 

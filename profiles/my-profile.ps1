@@ -47,6 +47,43 @@ function remote-to-server {
     Enter-PSSession -ComputerName $hostName -Credential Get-Credential
 }
 
+function find-device {
+    param([string] $manufacturer)
+    Get-WmiObject Win32_PNPEntity | 
+    Where-Object {$_.$manufacturer -match "Prolific"} |
+    Select -Property Caption
+}
+
+function change-ipaddress {
+    param(
+        [int] $index, 
+        [string] $ipaddress, 
+        [string] $mask, 
+        [string] $gateway,
+        [string[]] $dnsServers)
+    try {
+        Remove-NetIPAddress -InterfaceIndex $index -IPAddress *;
+    } catch {"ERROR - trying to remove the ip address...!"}
+    try {
+        Remove-NetRoute -InterfaceIndex $index -DestinationPrefix 0.0.0.0/0;
+    } catch {"ERROR - trying to remove the route...!"}
+    try {
+        New-NetIPAddress -InterfaceIndex $index -IPAddress $ipaddress -PrefixLength $mask -DefaultGateway $gateway
+    } catch {"ERROR - trying to add the new ip address...!"}
+    try {
+        Set-DnsClientServerAddress -InterfaceIndex $index -ServerAddresses ($dnsServers)
+    } catch {"ERROR - trying to add new DNS server addresses...!"}
+}
+
+function install-dotnet35 {
+    param([boolean] $online)
+    if ($online) {
+        DISM /Online /Enable-feature /FeatureName:NetFx3 /All
+    } else {
+        DISM /Online /Enable-feature /FeatureName:NetFx3 /All /LimitAccess /Source:e:\sources\sxs    
+    }
+}
+
 <#
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 [System.Net.ServicePointManager]::SecurityProtocol = 

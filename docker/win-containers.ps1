@@ -3,6 +3,8 @@ docker pull mcr.microsoft.com/windows/iotcore:1809
 docker pull mcr.microsolf.com/windows/servercore:ltsc2019
 docker pull mcr.microsoft.com/windows/nanoserver:1903
 
+docker pull mcr.microsoft.com/mssql/server:2019-latest
+
 # official linux distros
 docker pull centos
 docker pull ubuntu

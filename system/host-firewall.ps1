@@ -13,3 +13,16 @@ New-NetFirewallRule -DisplayName "Allow inbound ICMPv4" `
                    -IcmpType 8 `
                    -RemoteAddress $trustedIps `
                    -Action Allow
+
+New-NetFirewallRule -DisplayName NTP_SERVER `
+                    -RemoteAddress Any `
+                    -Enabled True `
+                    -Profile Any `
+                    -Direction Inbound `
+                    -Action Allow `
+                    -EdgeTraversalPolicy Block `
+                    -LocalPort 123 `
+                    -Protocol UDP `
+                    -Description 'host can listen for NTP requests over UDP 123'
+
+Get-NetFirewallRule -DisplayName NTP*

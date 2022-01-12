@@ -9,10 +9,8 @@ docker pull mcr.microsoft.com/mssql/server:2019-latest
 docker pull centos
 docker pull ubuntu
 
+# list all containers using the format string specified
 docker ps -a --format $psFormat
-
-# CENTOS
-docker run -ti 
 
 # WIN 10 IOT  - NOT WORKING !!!
 # docker run --rm -ti --name iot_0001 mcr.microsoft.com/windows/iotcore:1809 cmd.exe

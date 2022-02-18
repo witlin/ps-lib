@@ -3,3 +3,5 @@
 *.tar.gz
 *.rar
 */sample-scripts/
+/n4-super-installer/
+/training/

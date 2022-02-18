@@ -5,14 +5,7 @@ docker pull mcr.microsoft.com/windows/nanoserver:1903
 
 docker pull mcr.microsoft.com/mssql/server:2019-latest
 
-# official linux distros
-docker pull centos
-docker pull ubuntu
-
 docker ps -a --format $psFormat
-
-# CENTOS
-docker run -ti 
 
 # WIN 10 IOT  - NOT WORKING !!!
 # docker run --rm -ti --name iot_0001 mcr.microsoft.com/windows/iotcore:1809 cmd.exe
@@ -42,7 +35,7 @@ docker run -ti --name winbase_001 -P --user "NT AUTHORITY\SYSTEM" -v C:\Users\vm
   New-NetFirewallRule -Name "ContainerRDP" -DisplayName "RDP Port for connecting to the container" -Protocol TCP -LocalPort @(3389) -Action Allow 
   New-NetFirewallRule -Name "RDP" -DisplayName "Remote Desktop Protocol" -Protocol TCP -LocalPort @(3390) -Action Allow
 docker commit winbase_ps0002 n4base_img0001
-docker run --rm -ti --name winbase_ps0003 -e DISPLAY=$DISPLAY n4base_img0001 "C:\Program Files\Internet Explorer\iexplore.exe"
+docker run --rm -ti --name winbase_ps0003 n4base_img0001 "C:\Program Files\Internet Explorer\iexplore.exe"
 
 # MSSQL SERVER BASE
 # Runs on a WIN SERVER CORE image

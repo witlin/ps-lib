@@ -34,3 +34,14 @@ Get-ADRootDSE
 
 Install-WindowsFeature AD-Certificate
 Install-WindowsFeature ADCS-Web-Enrollment
+
+
+# AD Users
+get-aduser -filter 'name -like "Victor Smolinski"'
+
+New-ADUser -DisplayName:"Vitek" -GivenName:"Dayana" -Name:"Dayana Berta" -Path:"CN=Users,DC=vitek,DC=com" -SamAccountName:"dberta" -Type:="user" -UserPrincipalName:"dberta@vitek.com"
+
+
+# AD Groups
+Get-ADGroup -filter 'name -like "Domain*"' | Add-ADGroupMember -Members "CN=Victor Smolinski,DC=vitek,DC=com"
+

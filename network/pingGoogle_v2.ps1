@@ -1,0 +1,1 @@
+﻿Start-Process -FilePath ping -ArgumentList "-t www.google.com" #-RedirectStandardOutput "pingGoogle.txt"

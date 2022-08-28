@@ -39,3 +39,6 @@ IpAddress
 23.99.190.242
 
 mstsc /v: 23.99.190.242
+
+#make a new hyper-v vm from an existing vhdx resource
+New-VM -Name "axvm" -VHDPath "D:\vhd_imgs\WIN-56GUFVSP8DD-carlospublichsvres0net.VHDX" -Path "D:\hyper-v-vms"

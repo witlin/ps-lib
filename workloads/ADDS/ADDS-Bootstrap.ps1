@@ -33,3 +33,13 @@ Get-ADRootDSE
 
 # Safemode-password: Dc3S_@Dds01
 
+# Adding a new AD User to the domain
+Set-ADAccountPassword -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -NewPassword:"System.Security.SecureString" -Reset:$null -Server:"WIN-MP029PCO3QU.vitek.com"
+
+Enable-ADAccount -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -Server:"WIN-MP029PCO3QU.vitek.com"
+
+Add-ADPrincipalGroupMembership -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -MemberOf:"CN=Users,CN=Builtin,DC=vitek,DC=com" -Server:"WIN-MP029PCO3QU.vitek.com"
+
+Set-ADAccountControl -AccountNotDelegated:$false -AllowReversiblePasswordEncryption:$false -CannotChangePassword:$false -DoesNotRequirePreAuth:$false -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -PasswordNeverExpires:$false -Server:"WIN-MP029PCO3QU.vitek.com" -UseDESKeyOnly:$false
+
+Set-ADUser -ChangePasswordAtLogon:$true -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -Server:"WIN-MP029PCO3QU.vitek.com" -SmartcardLogonRequired:$false

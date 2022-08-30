@@ -5,3 +5,5 @@
 */sample-scripts/
 /n4-super-installer/
 /training/
+*.conf
+*.txt

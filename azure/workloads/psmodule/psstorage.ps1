@@ -1,0 +1,3 @@
+Get-AzStorageAccount
+
+Get-AzComputeResourceSku

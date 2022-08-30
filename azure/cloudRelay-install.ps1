@@ -46,3 +46,14 @@ foreach ($i in $azad_apps) {
 # >> --resource-group rg-cloudrelaycompute `
 # >> --template-file .\Distech.CloudRelay.Compute.json `
 # >> --parameters .\Distech.CloudRelay.Compute.Parameters.json
+
+# cd ..\Distech.CloudRelay.API\
+# az webapp deployment source config-zip `
+# >> --resource-group rg-cloudrelaycompute `
+# >> --name shubiweb `
+# >> --src .\Distech.CloudRelay.API.zip
+
+# az functionapp deployment source config-zip `
+# >> --resource-group rg-cloudrelaycompute `
+# >> --name shubifunctions `
+# >> --src .\Distech.CloudRelay.Functions.zip

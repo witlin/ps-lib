@@ -1,0 +1,16 @@
+{
+  "generatedBy": "Microsoft.NET.Sdk.Functions-1.0.29",
+  "configurationSource": "attributes",
+  "bindings": [
+    {
+      "type": "timerTrigger",
+      "schedule": "0 0 0 * * sun",
+      "useMonitor": true,
+      "runOnStartup": false,
+      "name": "timerInfo"
+    }
+  ],
+  "disabled": "FileStorage:Cleanup:Disabled",
+  "scriptFile": "../bin/Distech.CloudRelay.Functions.dll",
+  "entryPoint": "Distech.CloudRelay.Functions.FileStorageFunctions.CleanupExpiredBlobsAsync"
+}

@@ -13,6 +13,10 @@ w32tm /query /stripchart /computer:10.10.0.2 /dataonly /samples:5
 # Check timezone settings
 w32tm /tz
 
+# Add or remove time service data from the Windows Registry.
+w32tm /unregister
+w32tm /register
+
 # Service start/stop
 net start w32tm
 net stop w32tm
@@ -44,3 +48,15 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\W32Time\Config"
 
 # Restart Time Server
 Restart-Service W32Time
+
+# configure stratum 1 server list
+w32tm /config /manualpeerlist:"tick.usno.navy.mil ntp3.indypl.org time-a.nist.gov"
+
+# configure this host as a reliable ntp server
+w32 /config /reliable:yes
+# sync time from DC
+w32tm /config /syncfromflags:domhier
+# sync time from peers
+w32tm /config /syncfromflags:manual
+#update config
+w32tm /config /update

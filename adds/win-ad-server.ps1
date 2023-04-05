@@ -15,7 +15,7 @@ Install-WindowsFeature RSAT-AD-Tools
 Import-Module ActiveDirectory
 
 # Rename the host server to a proper name.
-Rename-Computer -NewName DCES-ADDS -Restart -Force -PassThru
+Rename-Computer -NewName VITEK-ADDS -Restart -Force -PassThru
 
 # Install Active Directory Domain Services
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
@@ -40,7 +40,16 @@ Install-WindowsFeature ADCS-Web-Enrollment
 get-aduser -filter 'name -like "Victor Smolinski"'
 
 New-ADUser -DisplayName:"Vitek" -GivenName:"Dayana" -Name:"Dayana Berta" -Path:"CN=Users,DC=vitek,DC=com" -SamAccountName:"dberta" -Type:="user" -UserPrincipalName:"dberta@vitek.com"
+# Adding a new AD User to the domain
+Set-ADAccountPassword -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -NewPassword:"System.Security.SecureString" -Reset:$null -Server:"WIN-MP029PCO3QU.vitek.com"
 
+Enable-ADAccount -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -Server:"WIN-MP029PCO3QU.vitek.com"
+
+Add-ADPrincipalGroupMembership -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -MemberOf:"CN=Users,CN=Builtin,DC=vitek,DC=com" -Server:"WIN-MP029PCO3QU.vitek.com"
+
+Set-ADAccountControl -AccountNotDelegated:$false -AllowReversiblePasswordEncryption:$false -CannotChangePassword:$false -DoesNotRequirePreAuth:$false -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -PasswordNeverExpires:$false -Server:"WIN-MP029PCO3QU.vitek.com" -UseDESKeyOnly:$false
+
+Set-ADUser -ChangePasswordAtLogon:$true -Identity:"CN=Dayana Berta,CN=Users,DC=vitek,DC=com" -Server:"WIN-MP029PCO3QU.vitek.com" -SmartcardLogonRequired:$false
 
 # AD Groups
 Get-ADGroup -filter 'name -like "Domain*"' | Add-ADGroupMember -Members "CN=Victor Smolinski,DC=vitek,DC=com"

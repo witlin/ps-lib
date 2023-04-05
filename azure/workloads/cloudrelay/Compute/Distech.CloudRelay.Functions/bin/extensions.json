@@ -1,0 +1,5 @@
+{
+  "extensions":[
+    { "name": "Startup", "typeName":"Distech.CloudRelay.Functions.Startup, Distech.CloudRelay.Functions, Version=1.0.22116.2, Culture=neutral, PublicKeyToken=null"}
+  ]
+}

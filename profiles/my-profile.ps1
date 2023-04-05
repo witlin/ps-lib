@@ -38,8 +38,8 @@ function Start-Workbench {
     Start-Process -FilePath $Path 
 }
 function Start-Station {
-    param([string] $Path, [String[]] $Args)
-    Start-Process -FilePath $Path -ArgumentList $Args
+    param([string] $Path, [String[]] $Argus)
+    Start-Process -FilePath $Path -ArgumentList $Argus
 }
 
 function remote-to-server {

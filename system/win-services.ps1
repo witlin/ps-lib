@@ -1,6 +1,6 @@
 # Server-core commands and functions
 
-Get-WindowsFeature | where Installed 
+Get-WindowsFeature | Where-Object Installed 
 Get-WindowsFeature -Name RSAT*
 Get-WindowsFeature -Name DNS*
 Get-WindowsFeature -Name AD*
@@ -22,5 +22,5 @@ function is-service-running {
 
 function is-feature-installed {
     param ( [Parameter ()] [string] $name )
-    Get-WindowsFeature -Name $name | where Installed
+    Get-WindowsFeature -Name $name | Where-Object Installed
 }

@@ -68,3 +68,35 @@
 -- SELECT DB_ID('Niagara_TS02') AS DATABASE_ID;
 
 -- SELECT OBJECT_ID('dbo.STALE_DATA_SAMPLES') AS OBJECT_ID;
+
+------------------------------------------------------------
+
+-- USE Niagara_TS02
+-- create table FAULT_DATA_SAMPLES
+-- (
+--     ID int identity(1,1) primary key not null,
+--     TBL_NAME varchar (200) null,
+--     TIMESTAMP datetime not null,
+--     TRENDFLAGS int null,
+--     STATUS int null,
+--     VALUE float null,
+--     TRENDFLAGS_TAG varchar (500) null,
+--     STATUS_TAG varchar (500) null
+-- )
+-- GO
+
+------------------------------------------------------------
+
+USE Niagara_TS02
+create table TCE_DATA_SAMPLES
+(
+    ID int identity(1,1) primary key not null,
+    TBL_NAME varchar (200) null,
+    TIMESTAMP datetime not null,
+    TRENDFLAGS int null,
+    STATUS int null,
+    VALUE float null,
+    TRENDFLAGS_TAG varchar (500) null,
+    STATUS_TAG varchar (500) null
+)
+GO

@@ -17,9 +17,9 @@ declare tcursor cursor for
 from INFORMATION_SCHEMA.TABLES
 where TABLE_TYPE = 'BASE TABLE'
 
-and TABLE_CATALOG
+    and TABLE_CATALOG
 = 'Niagara_TS02'
-    and TABLE_NAME != 'STALE_DATA_SAMPLES'
+    and TABLE_NAME != 'TCE_DATA_SAMPLES'
 order by TABLE_NAME;
 
 open tcursor;
@@ -29,10 +29,10 @@ while @@FETCH_STATUS = 0
 begin
     print @tableName
     -- todo - insert into stale table...
-    select @sqlString = 'INSERT INTO STALE_DATA_SAMPLES ' +
+    select @sqlString = 'INSERT INTO TCE_DATA_SAMPLES ' +
 					 '(TBL_NAME, TIMESTAMP, TRENDFLAGS, STATUS, VALUE, TRENDFLAGS_TAG, STATUS_TAG)' +
                       'SELECT '''+@tableName+''', TIMESTAMP, TRENDFLAGS, STATUS, VALUE, TRENDFLAGS_TAG, STATUS_TAG FROM  '+@tableName+ ' t ' +
-					  'WHERE t.STATUS_TAG = ''{stale}''';
+					  'WHERE t.TRENDFLAGS_TAG = ''{hidden}''';
     exec (@sqlString)
     fetch next from tcursor
  into @tableName;
@@ -52,7 +52,7 @@ SELECT TOP (1000)
       , [VALUE]
       , [TRENDFLAGS_TAG]
       , [STATUS_TAG]
-FROM [Niagara_TS02].[dbo].[STALE_DATA_SAMPLES]
+FROM [Niagara_TS02].[dbo].[TCE_DATA_SAMPLES]
 
 GO
 
@@ -61,8 +61,6 @@ GO
 
 --select TABLE_NAME,TABLE_TYPE, @@ROWCOUNT AS 'ROW COUNT' from INFORMATION_SCHEMA.TABLES
 
---drop database Niagara_TS01
-
 --SELECT TOP (10) [TIMESTAMP]
 --      ,[TRENDFLAGS]
 --      ,[STATUS]
@@ -70,4 +68,4 @@ GO
 --      ,[TRENDFLAGS_TAG]
 --      ,[STATUS_TAG]
 --  FROM [TS02_ECYBOTTOM_EF_SPD]
---  WHERE STATUS_TAG = '{stale}'
+--  WHERE TRENDFLAGS_TAG = '{hidden}'

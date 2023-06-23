@@ -1,7 +1,7 @@
 # Setup
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
-$url = 'https://192.168.1.236/api/rest/v1/protocols/bacnet/local/objects/binary-value/101/properties/present-value?encode=json'
+$url = 'https://ecy-bottom.vitek.com/api/rest/v1/protocols/bacnet/local/objects/binary-value/101/properties/present-value?encode=json'
 $credentials = Get-Credential
 
 #POST
